@@ -156,6 +156,7 @@ function main {
   source ${scriptDir}/terragrunt_init.sh
   source ${scriptDir}/terragrunt_validate.sh
   source ${scriptDir}/terragrunt_plan.sh
+  source ${scriptDir}/terragrunt_plan_all.sh
   source ${scriptDir}/terragrunt_apply.sh
   source ${scriptDir}/terragrunt_output.sh
   source ${scriptDir}/terragrunt_import.sh
@@ -183,6 +184,10 @@ function main {
     plan)
       installTerragrunt
       terragruntPlan ${*}
+      ;;
+    plan-all)
+      installTerragrunt
+      terragruntPlanAll ${*}
       ;;
     apply)
       installTerragrunt
