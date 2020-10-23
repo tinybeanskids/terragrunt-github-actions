@@ -144,7 +144,9 @@ function installTerragrunt {
     echo "Failed to move Terragrunt ${tgVersion}"
     exit 1
   fi
+
   echo "Successfully moved Terragrunt ${tgVersion}"
+  terragrunt --version
 }
 
 function main {
@@ -166,10 +168,7 @@ function main {
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
 
   ls
-  which terraform
-  which terragrunt
   terraform --version
-  terragrunt --version
 
   case "${tfSubcommand}" in
     fmt)
