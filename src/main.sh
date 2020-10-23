@@ -146,7 +146,6 @@ function installTerragrunt {
   fi
 
   echo "Successfully moved Terragrunt ${tgVersion}"
-  terragrunt --version
 }
 
 function main {
@@ -177,6 +176,9 @@ function main {
       ;;
     init)
       installTerragrunt
+      which terraform
+      which terragrunt
+      terragrunt --version
       terragruntInit ${*}
       ;;
     validate)
