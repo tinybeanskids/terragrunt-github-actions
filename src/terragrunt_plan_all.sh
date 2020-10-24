@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function terragruntPlan {
+function terragruntPlanAll {
   # Gather the output of `terragrunt plan`.
   echo "plan: info-all: planning Terragrunt configuration in ${tfWorkingDir}"
   planOutput=$(${tfBinary} plan-all -detailed-exitcode -input=false ${*} 2>&1)
