@@ -127,7 +127,7 @@ function installTerragrunt {
     fi
   fi
 
-  url="https://github.com/gruntwork-io/terragrunt/releases/download/${tgVersion}/terragrunt_linux_amd64"
+  url="https://github.com/gruntwork-io/terragrunt/releases/download/v${tgVersion}/terragrunt_linux_amd64"
 
   echo "Downloading Terragrunt ${tgVersion}"
   curl -s -S -L -o /tmp/terragrunt ${url}
@@ -139,12 +139,14 @@ function installTerragrunt {
 
   echo "Moving Terragrunt ${tgVersion} to PATH"
   chmod +x /tmp/terragrunt
-  mv /tmp/terragrunt /usr/local/bin/terragrunt 
+  mv /tmp/terragrunt /usr/local/bin/terragrunt
   if [ "${?}" -ne 0 ]; then
     echo "Failed to move Terragrunt ${tgVersion}"
     exit 1
   fi
+
   echo "Successfully moved Terragrunt ${tgVersion}"
+  terragrunt --version
 }
 
 function main {
@@ -154,6 +156,7 @@ function main {
   source ${scriptDir}/terragrunt_init.sh
   source ${scriptDir}/terragrunt_validate.sh
   source ${scriptDir}/terragrunt_plan.sh
+  source ${scriptDir}/terragrunt_plan_all.sh
   source ${scriptDir}/terragrunt_apply.sh
   source ${scriptDir}/terragrunt_output.sh
   source ${scriptDir}/terragrunt_import.sh
@@ -181,6 +184,10 @@ function main {
     plan)
       installTerragrunt
       terragruntPlan ${*}
+      ;;
+    plan-all)
+      installTerragrunt
+      terragruntPlanAll ${*}
       ;;
     apply)
       installTerragrunt
