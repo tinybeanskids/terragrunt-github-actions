@@ -5,7 +5,7 @@ function terragruntPlanAll {
   echo "plan: info-all: planning Terragrunt configuration in ${tfWorkingDir}"
   echo "Extra option: ${*}"
   #planOutput=$(${tfBinary} plan-all -detailed-exitcode -input=false -lock=false ${*} 2>&1)
-  planOutput=$(${tfBinary} plan-all -detailed-exitcode -input=false -lock=false ${*} 2>&1 >(grep -v "\[terragrunt]" >&2) | grep -v -e "Refreshing state..." -e "Refreshing Terraform" -e "refreshed state")
+  planOutput=$(${tfBinary} plan-all -detailed-exitcode -input=false -lock=false ${*} 2>&1 | (grep -v "\[terragrunt]" >&2) | grep -v -e "Refreshing state..." -e "Refreshing Terraform" -e "refreshed state")
   planExitCode=${?}
   planHasChanges=false
   planCommentStatus="Failed"
