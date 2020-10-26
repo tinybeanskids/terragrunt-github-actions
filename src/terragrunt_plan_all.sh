@@ -19,13 +19,12 @@ function terragruntPlanAll {
     exit ${planExitCode}
   fi
 
-  # Exit code of 2 indicates success with changes. Print the output, change the
-  # exit code to 0, and mark that the plan has changes.
+  # Exit code of 2 indicates success with changes. Print the output and mark that plan has changes.
   if [ ${planExitCode} -eq 2 ]; then
-    planExitCode=0
+    #planExitCode=0
     planHasChanges=true
     planCommentStatus="Success"
-    echo "plan-all: info: successfully planned Terragrunt configuration in ${tfWorkingDir}"
+    echo "plan-all: info: Change plan detected Terragrunt configuration in ${tfWorkingDir}"
     echo "${planOutput}"
     echo
     if echo "${planOutput}" | egrep '^-{72}$' &> /dev/null; then
